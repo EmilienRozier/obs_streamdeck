@@ -1,0 +1,30 @@
+.container {
+
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    gap: 15px;
+}
+
+li {
+    list-style: none;
+}
+
+.btn {
+    width: 50px;
+    height: 50px;
+}
+
+.btn.active {
+    background-color: green;
+}
+
+#stop.btn {
+    background: red;
+}
+
+#stop.btn:active {
+    background: #520000;
+}
