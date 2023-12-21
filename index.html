@@ -1,109 +1,30 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/obs-websocket-js"></script>
-    <title>WebSocket OBS Control</title>
+    <script src="script.js"></script>
+    <title>Streamdeck</title>
 </head>
 
 <body>
-
-    <div id="erreur">
-
-    </div>
-
-    <div class="container">
-        <div id="entete"></div>
-        <ul>
-            <li><button class="btn">no-scene</button></li>
-            <li><button class="btn">no-scene</button></li>
-            <li><button class="btn">no-scene</button></li>
-            <li><button class="btn">no-scene</button></li>
-            <li><button class="btn">no-scene</button></li>
-            <li><button class="btn">no-scene</button></li>
-            <li><button class="btn" id="record">start-record</button></li>
-            <li><button class="btn" id="">no-scene</button></li>
-            <li><button class="btn" id="stop">stop-record</button></li>
-        </ul>
-    </div>
+    <h1>STEAMDECK</h1>
+    <section>
+        <button id="start">START</button>
+        <button id="pause">PAUSE</button>
+        <button id="end">END</button>
+        <button id="cam">OVERLAY CAM</button>
+        <button id="jeu">OVERLAY DE JEU</button>
+        <button id="donation">DONATION GOAL</button>
+        <button id="bits-subs">BITS - SUBS<br>FOLLOW</button>
+    </section>
 
     <script>
-        const obs = new OBSWebSocket();
-
-        const btn = document.querySelectorAll('.btn');
-        const recordBtn = document.getElementById('record');
-        const stopRecordBtn = document.getElementById('stop');
-        const entete = document.getElementById('entete');
-
-        btn.forEach(b => {
-            const btns = document.querySelectorAll('.btn');
-
-            btns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    btns.forEach(b => {
-                        b.classList.remove('active');
-                    });
-                    btn.classList.add('active');
-
-                });
-            });
-
-        });
-
-        async function startRecord() {
-            try {
-                await obs.call('StartRecord');
-                console.log('Recording started');
-            } catch (error) {
-                console.error('Failed to start recording', error.code, error.message);
-            }
-        }
-
-        async function stopRecord() {
-            try {
-                await obs.call('StopRecord');
-                console.log('Recording stoped');
-            } catch(error) {
-                console.error('Failed to stop recording', error.code, error.message);
-            }
-        }
-        async function main() {
-            try {
-                const { obsWebSocketVersion, negotiatedRpcVersion } = await obs.connect('ws://192.168.1.60:4455', 'env6rrwj4W1yKFj7', {
-                    rpcVersion: 1
-                });
-
-                console.log(`Connected to server ${obsWebSocketVersion} (using RPC ${negotiatedRpcVersion})`);
-
-
-
-                const sceneList = await obs.call('GetSceneList');
-                const scenes = sceneList.scenes;
-                entete.innerText = sceneList.currentProgramSceneName;
-
-                for(let i = 0; i < scenes.length < 6; i++) {
-                    btn[i].innerText = scenes[i].sceneName;
-                }
-
-                recordBtn.addEventListener('click', () => {
-                    startRecord();
-                });
-
-                stopRecordBtn.addEventListener('click', () => {
-                    stopRecord();
-                });
-
-
-            } catch (error) {
-                console.error('Failed to connect', error.code, error.message);
-            }
-        }
-
-        main();
+        
     </script>
-
 </body>
 
 </html>
