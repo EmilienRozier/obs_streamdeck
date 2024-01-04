@@ -84,8 +84,6 @@ function ChangeScene() {
         } else {
             await obs.call('SetSceneItemEnabled', { sceneName: 'jeu', sceneItemId: 3, sceneItemEnabled: false });
         }
-
-        console.log();
     })
 
 }
