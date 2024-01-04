@@ -36,7 +36,7 @@ async function main() {
     } catch (error) {
         console.error('Failed to connect', error.code, error.message);
         if (error.code === 1006) {
-            console.log('bad connexion');
+            console.log('OBS IS CLOSED OR WRONG IP & PASSWORD, ACTUAL : '+ip, mdp);
             conn();
         }
     }
